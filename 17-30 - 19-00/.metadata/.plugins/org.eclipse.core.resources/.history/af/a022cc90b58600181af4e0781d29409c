@@ -1,0 +1,10 @@
+package ua.logos.entity;
+
+public class Student {
+
+	private String fullName;
+	
+	private String email;
+	
+	private int age;
+}

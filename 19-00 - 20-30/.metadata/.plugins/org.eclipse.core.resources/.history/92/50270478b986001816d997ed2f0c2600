@@ -1,0 +1,19 @@
+package ua.logos;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+public class Main {
+
+	static Connection conn;
+	
+	public static void main(String[] args) {
+		String dbUrl = "jdbc:mysql://localhost:3306/university";
+		String username = "zavada";
+		String password = "zavada";
+		
+		conn = DriverManager.getConnection(dbUrl, username, password);
+		
+		
+	}
+}

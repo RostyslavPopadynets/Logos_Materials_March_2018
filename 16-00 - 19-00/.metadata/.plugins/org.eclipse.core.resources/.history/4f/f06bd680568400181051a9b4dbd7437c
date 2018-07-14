@@ -1,0 +1,5 @@
+package ua.logos.spring.SpringBootApp.controller;
+
+public class MyController {
+
+}

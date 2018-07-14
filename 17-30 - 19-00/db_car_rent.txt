@@ -1,0 +1,48 @@
+DROP DATABASE IF EXISTS car_rent;
+CREATE DATABASE `car_rent` char set utf8;
+
+USE car_rent;
+
+CREATE TABLE customer(
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50),
+    details TEXT,
+    email VARCHAR(45) NOT NULL UNIQUE,
+    gender VARCHAR(10),
+    address VARCHAR(100) NOT NULL,
+    town VARCHAR(50) NOT NULL,
+    age INT
+);
+
+CREATE TABLE manufacturer(
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL UNIQUE,
+    description TEXT
+);
+
+CREATE TABLE model(
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL,
+    description TEXT
+);
+
+CREATE TABLE vehicle(
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    reg_number VARCHAR(10) NOT NULL UNIQUE,
+    current_milleage INT NOT NULL,
+    hourly_rate decimal(6,2) DEFAULT 150.00,
+    engine_size decimal(2,1) NOT NULL,
+    color VARCHAR(20)
+);
+
+CREATE TABLE vehicle_category(
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(20) NOT NULL UNIQUE,
+    description TEXT
+);
+
+CREATE TABLE booking(
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    date_from datetime NOT NULL,
+    date_to datetime NOT NULL
+);

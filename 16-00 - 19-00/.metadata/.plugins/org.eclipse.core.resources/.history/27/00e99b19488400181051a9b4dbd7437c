@@ -1,0 +1,19 @@
+package ua.logos;
+
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import ua.logos.model.FootballCoach;
+import ua.logos.service.Coach;
+
+public class App {
+	public static void main(String[] args) {
+		
+		ClassPathXmlApplicationContext container = 
+				new ClassPathXmlApplicationContext("applicationContainer.xml");
+		
+		Coach footballCoach = new FootballCoach();
+		FootballCoach footballCoach2 = new FootballCoach();
+		
+		container.close();
+	}
+}

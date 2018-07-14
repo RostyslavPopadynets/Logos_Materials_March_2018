@@ -1,0 +1,9 @@
+package ua.logos.service;
+
+public interface Coach {
+	// ua.logos.model
+	public String getDailyWorkout();
+	
+	public String getDailyFortune();
+	
+}
