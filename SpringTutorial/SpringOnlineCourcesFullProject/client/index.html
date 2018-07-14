@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="public/css/style.css">
+</head>
+
+<body>
+    <main>
+        <div class="container my-5">
+            <div class="row">
+                <div class="col-3">
+                    <form id="teacherForm">
+                        <div class="form-group">
+                            <label for="firstname">First name</label>
+                            <input type="text" class="form-control" name="firstName" placeholder="Enter teacher first name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lastname">Last name</label>
+                            <input type="text" class="form-control" name="lastName" placeholder="Enter teacher name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" name="email" placeholder="Enter teacher email">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="age">Age</label>
+                            <input type="number" class="form-control" name="age" placeholder="Enter teacher age">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea type="number" class="form-control" name="description" placeholder="Enter teacher description"></textarea>
+                        </div>
+
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-block btn-primary">Add teacher</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-9">
+                    <div class="card">
+                        <table id="teachersTable" class="table table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <!-- <th scope="col">Public ID</th> -->
+                                    <th scope="col">First Name</th>
+                                    <th scope="col">Last Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Edit / Delete </th>
+                                    <th scope="col">More details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Thompson</td>
+                            <td>mark.thompson@gmail.com</td>
+                            <td>
+                                <a class="btn btn-sm btn-primary" href="#">edit</a>
+                                <a class="btn btn-sm btn-danger" href="#">delete</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-sm btn-info" href="#">
+                                    <i class="fas fa-info-circle"></i> Details</a>
+                            </td>
+                        </tr> -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="public/js/jquery-3.3.1.min.js"></script>
+    <script src="public/js/bootstrap.min.js"></script>
+    <script src="public/js/app.js"></script>
+</body>
+
+</html>
