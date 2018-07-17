@@ -3,7 +3,7 @@ package com.zavada.app.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.zavada.app.dto.TeacherDTO;
+import com.zavada.app.domain.dto.TeacherDTO;
 
 public interface TeacherService {
 
@@ -15,4 +15,5 @@ public interface TeacherService {
 	
 	List<TeacherDTO> findAll();
 	
+	void delete(String teacherId);
 }

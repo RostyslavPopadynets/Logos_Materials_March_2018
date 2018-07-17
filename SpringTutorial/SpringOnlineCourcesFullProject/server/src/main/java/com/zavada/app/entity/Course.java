@@ -32,6 +32,9 @@ import lombok.Setter;
 @Table(name = "course")
 public class Course extends BaseEntity {
 
+	@Column(name = "course_id", length = 50, nullable = false, unique = true)
+	private String courseId;
+	
 	@Column(name = "title", length = 100, nullable = false, unique = true)
 	private String title;
 	

@@ -1,10 +1,26 @@
-.bg__card__navbar{
-	background-color: #000000;
+body{
+    margin: 0;
+    padding: 0;
+
 }
-.bg__card__footer{
-	background-color: #000000 !important;
+
+.fieldset-border {
+    border: 1px groove #ddd;
+    padding: 1.5em 1.4em 1.4em 1.4em;
 }
-#add__new__list{
-    top: -38px;
-    right: 0px;
+
+.man {
+    background: url('https://i.pinimg.com/originals/e7/0e/7d/e70e7d41a4a2af947f551aa49b1236d2.png');
+    width: 185px;
+    height: 330px;
+    margin: auto;
+    animation: walk 0.5s infinite steps(8);
+}
+@keyframes walk {
+    0%{
+        background-position: 0px;
+    }
+    100%{
+        background-position: -1472px;
+    }
 }

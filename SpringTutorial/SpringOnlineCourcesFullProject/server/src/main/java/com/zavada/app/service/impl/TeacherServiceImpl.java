@@ -8,7 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.zavada.app.dto.TeacherDTO;
+import com.zavada.app.domain.dto.TeacherDTO;
 import com.zavada.app.entity.Teacher;
 import com.zavada.app.repository.TeacherRepository;
 import com.zavada.app.service.TeacherService;
@@ -22,6 +22,7 @@ public class TeacherServiceImpl implements TeacherService {
 
 	@Autowired
 	private TeacherRepository teacherRepository;
+	
 	@Autowired
 	private ModelMapper modelMapper;
 
@@ -54,8 +55,27 @@ public class TeacherServiceImpl implements TeacherService {
 
 	@Override
 	public List<TeacherDTO> findAll() {
-		return teacherRepository.findAll().stream().map(entity -> modelMapper.map(entity, TeacherDTO.class))
-				.collect(Collectors.toList());
+		return teacherRepository.findAll().stream()
+				// .filter(s -> { System.out.println(s); return true;})
+				.map(entity -> {
+					return TeacherDTO
+							.builder()
+								.id(entity.getId())
+								.teacherId(entity.getTeacherId())
+								.firstName(entity.getFirstName())
+								.lastName(entity.getLastName())
+								.email(entity.getEmail())
+								.description(entity.getDescription())
+								.age(entity.getAge())
+							.build();
+				}).collect(Collectors.toList());
+	}
+
+	@Override
+	public void delete(String teacherId) {
+		Teacher teacher = teacherRepository.findByTeacherId(teacherId).get();
+		
+		if(teacher != null) teacherRepository.delete(teacher);
 	}
 
 }
