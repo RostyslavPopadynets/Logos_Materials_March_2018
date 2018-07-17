@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.springframework.ide.eclipse.boot.launch">
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-<listEntry value="/SpringBootApp/src/main/java/ua/logos/spring/SpringBootApp/SpringBootAppApplication.java"/>
+<listEntry value="/SpringBootApp"/>
 </listAttribute>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
-<listEntry value="1"/>
+<listEntry value="4"/>
 </listAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.CLASSPATH_PROVIDER" value="org.springframework.ide.eclipse.boot.launch.BootMavenClassPathProvider"/>
-<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="ua.logos.spring.SpringBootApp.SpringBootAppApplication"/>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="ua.logos.spring.SpringBootAppApplication"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="SpringBootApp"/>
 <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.springframework.ide.eclipse.boot.launch.BootMavenSourcePathProvider"/>
 <stringAttribute key="process_factory_id" value="org.springframework.ide.eclipse.boot.launch.process.BootProcessFactory"/>
