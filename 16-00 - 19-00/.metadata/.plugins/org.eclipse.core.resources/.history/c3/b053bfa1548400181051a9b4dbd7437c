@@ -1,5 +1,0 @@
-package ua.logos.spring.SpringBootApp.config;
-
-public class WebMvcConfig {
-
-}

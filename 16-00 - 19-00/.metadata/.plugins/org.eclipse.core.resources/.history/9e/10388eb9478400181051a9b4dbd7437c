@@ -1,9 +1,0 @@
-package ua.logos.model;
-
-import ua.logos.service.Coach;
-
-public class FootballCoach implements Coach {
-
-	
-	
-}
