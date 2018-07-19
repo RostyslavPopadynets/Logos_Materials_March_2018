@@ -1,7 +1,11 @@
 package ua.logos.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -23,4 +27,11 @@ public class Student extends BaseEntity {
 	private String email;
 
 	private int age;
+	
+//	@ManyToMany(mappedBy = "students")
+//	private List<Course> courses;
+	
+	@OneToMany(mappedBy = "student")
+	private List<CourseStudent> courseStudents;
+	
 }

@@ -7,6 +7,7 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
@@ -14,6 +15,7 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "teacher_details")
+@ToString(callSuper = true)
 public class TeacherDetails extends BaseEntity {
 
 	private String hobby;
