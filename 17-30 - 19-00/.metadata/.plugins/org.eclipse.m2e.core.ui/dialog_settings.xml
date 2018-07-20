@@ -75,6 +75,7 @@
 			<item value="ua.logos"/>
 		</list>
 		<list key="artifactId">
+			<item value="SpringCore"/>
 			<item value="MavenORM"/>
 		</list>
 		<list key="projectNameTemplate">

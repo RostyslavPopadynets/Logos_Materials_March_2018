@@ -33,6 +33,7 @@
 	</section>
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="C:\DEVELOPMENT\LOGOS_MARCH_2018\16-00 - 19-00\SpringRestServer"/>
 			<item value="C:\DEVELOPMENT\LOGOS\March\16-00 - 19-00\SpringBootApp"/>
 			<item value="C:\DEVELOPMENT\LOGOS\March-16-19\MavenORM\src\main\java\ua\logos\entity\BaseEntity.java"/>
 		</list>

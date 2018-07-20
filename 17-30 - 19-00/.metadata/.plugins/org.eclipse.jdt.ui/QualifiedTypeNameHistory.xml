@@ -37,4 +37,10 @@
 <fullyQualifiedTypeName name="ua.logos.entity.Teacher"/>
 <fullyQualifiedTypeName name="ua.logos.entity.TeacherDetails"/>
 <fullyQualifiedTypeName name="lombok.ToString"/>
+<fullyQualifiedTypeName name="org.springframework.context.support.ClassPathXmlApplicationContext"/>
+<fullyQualifiedTypeName name="ua.logos.model.FootballCoach"/>
+<fullyQualifiedTypeName name="ua.logos.model.HockeyCoach"/>
+<fullyQualifiedTypeName name="ua.logos.service.FortuneService"/>
+<fullyQualifiedTypeName name="ua.logos.service.Coach"/>
+<fullyQualifiedTypeName name="ua.logos.model.TennisCoach"/>
 </qualifiedTypeNameHistroy>
