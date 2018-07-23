@@ -10,8 +10,6 @@
 <fullyQualifiedTypeName name="org.hibernate.jpa.boot.spi.EntityManagerFactoryBuilder"/>
 <fullyQualifiedTypeName name="javax.persistence.EntityManagerFactory"/>
 <fullyQualifiedTypeName name="javax.persistence.Persistence"/>
-<fullyQualifiedTypeName name="javax.persistence.EntityManager"/>
-<fullyQualifiedTypeName name="java.math.BigDecimal"/>
 <fullyQualifiedTypeName name="javax.persistence.Entity"/>
 <fullyQualifiedTypeName name="javax.persistence.Table"/>
 <fullyQualifiedTypeName name="javax.persistence.Id"/>
@@ -27,8 +25,6 @@
 <fullyQualifiedTypeName name="ua.logos.entity.Student"/>
 <fullyQualifiedTypeName name="javax.persistence.JoinTable"/>
 <fullyQualifiedTypeName name="javax.persistence.JoinColumn"/>
-<fullyQualifiedTypeName name="java.util.List"/>
-<fullyQualifiedTypeName name="ua.logos.entity.Course"/>
 <fullyQualifiedTypeName name="javax.persistence.ManyToMany"/>
 <fullyQualifiedTypeName name="lombok.Data"/>
 <fullyQualifiedTypeName name="lombok.Getter"/>
@@ -36,5 +32,11 @@
 <fullyQualifiedTypeName name="lombok.NoArgsConstructor"/>
 <fullyQualifiedTypeName name="lombok.Builder"/>
 <fullyQualifiedTypeName name="lombok.AllArgsConstructor"/>
+<fullyQualifiedTypeName name="java.util.Arrays"/>
+<fullyQualifiedTypeName name="lombok.ToString"/>
+<fullyQualifiedTypeName name="javax.persistence.EntityManager"/>
+<fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="ua.logos.entity.Teacher"/>
+<fullyQualifiedTypeName name="ua.logos.entity.Course"/>
+<fullyQualifiedTypeName name="java.math.BigDecimal"/>
 </qualifiedTypeNameHistroy>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -14,12 +15,14 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString(callSuper = true, exclude = {"courses", "teacherDetails"})
 
 @Entity
 @Table(name = "teacher")
@@ -37,7 +40,7 @@ public class Teacher extends BaseEntity {
 	@OneToMany(mappedBy = "teacher")
 	private List<Course> courses;
 
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "teacher_details_id")
 	private TeacherDetails teacherDetails;
 

@@ -43,4 +43,14 @@
 <fullyQualifiedTypeName name="ua.logos.service.FortuneService"/>
 <fullyQualifiedTypeName name="ua.logos.service.Coach"/>
 <fullyQualifiedTypeName name="ua.logos.model.TennisCoach"/>
+<fullyQualifiedTypeName name="ua.logos.SpringBootAppApplicationTests"/>
+<fullyQualifiedTypeName name="org.springframework.boot.web.servlet.support.SpringBootServletInitializer"/>
+<fullyQualifiedTypeName name="org.springframework.context.annotation.Configuration"/>
+<fullyQualifiedTypeName name="org.springframework.web.servlet.config.annotation.EnableWebMvc"/>
+<fullyQualifiedTypeName name="org.springframework.web.servlet.config.annotation.WebMvcConfigurer"/>
+<fullyQualifiedTypeName name="org.springframework.web.servlet.view.JstlView"/>
+<fullyQualifiedTypeName name="org.springframework.stereotype.Controller"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMapping"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMethod"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
 </qualifiedTypeNameHistroy>
