@@ -12,5 +12,8 @@
 	<h4> My First Spring page </h4>
 
 	<a href="/registration">Go to registration page</a>
+	<br>
+	<br>
+	<a href="/news">Go to news</a>	
 </body>
 </html>

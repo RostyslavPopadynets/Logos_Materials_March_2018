@@ -1,0 +1,33 @@
+package ua.logos;
+
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import ua.logos.model.FootballCoach;
+import ua.logos.model.HockeyCoach;
+import ua.logos.model.TennisCoach;
+import ua.logos.service.Coach;
+
+public class App {
+	public static void main(String[] args) {
+
+		ClassPathXmlApplicationContext container = 
+				new ClassPathXmlApplicationContext("applicationContainer.xml");
+		
+		// FootballCoach coach = new FootballCoach();
+		// Coach coach2 = new FootballCoach();
+		
+		Coach footballCoach = container.getBean("footballCoach", FootballCoach.class);
+		System.out.println(footballCoach.getDailyWorkout());
+		System.out.println(footballCoach.getDailyFortune());
+		
+		Coach tennisCoach = container.getBean(TennisCoach.class);
+		System.out.println(tennisCoach.getDailyWorkout());
+		System.out.println(tennisCoach.getDailyFortune());
+		
+		Coach hockeyCoach = container.getBean(HockeyCoach.class);
+		System.out.println(hockeyCoach.getDailyWorkout());
+		System.out.println(hockeyCoach.getDailyFortune());
+		
+		container.close();
+	}
+}
