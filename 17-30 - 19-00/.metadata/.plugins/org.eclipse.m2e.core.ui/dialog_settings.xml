@@ -33,6 +33,7 @@
 	</section>
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="C:\DEVELOPMENT\LOGOS_MARCH_2018\17-30 - 19-00\SpringBootRESTServer"/>
 			<item value="C:\DEVELOPMENT\LOGOS_MARCH_2018\17-30 - 19-00\SpringBootApp"/>
 			<item value="C:\DEVELOPMENT\LOGOS_MARCH_2018\17-30 - 19-00\MavenORM\src\main\java\META-INF\persistence.xml"/>
 		</list>
