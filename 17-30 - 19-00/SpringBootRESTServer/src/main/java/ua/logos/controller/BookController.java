@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ua.logos.entity.Book;
+import ua.logos.entity.BookDTO;
 import ua.logos.service.BookService;
 
 @RestController
@@ -33,8 +34,8 @@ public class BookController {
 		}
 	*/
 	@PostMapping // localhost:8080/books
-	public ResponseEntity<Void> addBook(@RequestBody Book book) {
-		bookService.saveBook(book);
+	public ResponseEntity<Void> addBook(@RequestBody BookDTO book) {
+		//bookService.saveBook(book);
 		
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
