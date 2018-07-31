@@ -11,7 +11,7 @@ import lombok.Data;
 
 @Data
 @MappedSuperclass
-//@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class BaseEntity {
 
 	@Id

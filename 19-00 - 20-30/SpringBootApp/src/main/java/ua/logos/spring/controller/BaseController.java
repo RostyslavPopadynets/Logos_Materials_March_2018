@@ -15,6 +15,8 @@ public class BaseController {
 		return "home";
 	}
 	
+	// resources
+	
 	@GetMapping("/news")
 	public String showNews() {
 		return "news-page";
