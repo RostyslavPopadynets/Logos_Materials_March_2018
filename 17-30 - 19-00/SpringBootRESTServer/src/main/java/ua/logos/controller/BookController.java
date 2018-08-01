@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ua.logos.domain.BookDTO;
@@ -96,5 +97,17 @@ public class BookController {
 		}
 		
 		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+	}
+	
+	@GetMapping("/category/{categoryId}")
+	public ResponseEntity<List<BookDTO>> findBooksByCategoryId(
+			@PathVariable("categoryId") Long id,
+			@RequestParam("title") String name) {
+		
+		System.out.println(name);
+		
+		List<BookDTO> bookDTOs = bookService.findBookByCategoryId(id);
+		
+		return new ResponseEntity<List<BookDTO>>(bookDTOs, HttpStatus.OK);
 	}
 }

@@ -16,9 +16,8 @@ public class BookDTO {
 	private Long id;
 	private String title;
 	private String description;
-	private BigDecimal price;
-	private String imageUrl;
 	private String isbn;
+	private BigDecimal price;
 	private String author;
-	private CategoryDTO category;
+	
 }
