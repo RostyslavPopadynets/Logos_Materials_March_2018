@@ -3,6 +3,8 @@ package ua.logos.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ua.logos.domain.BookDTO;
+import ua.logos.domain.filter.SimpleFilter;
 import ua.logos.entity.Book;
 import ua.logos.service.BookService;
 
@@ -110,4 +113,25 @@ public class BookController {
 		
 		return new ResponseEntity<List<BookDTO>>(bookDTOs, HttpStatus.OK);
 	}
+	
+	@GetMapping("/pages")
+	public ResponseEntity<List<BookDTO>> findBooksByPage(
+			@PageableDefault Pageable pageable) {
+		List<BookDTO> bookDTOs = bookService.findAllBooksByPages(pageable);	
+		return new ResponseEntity<List<BookDTO>>(bookDTOs, HttpStatus.OK);
+	}
+	
+	@GetMapping("/search")
+	public ResponseEntity<List<BookDTO>> findAllBooksBySearch(
+//			@RequestParam(value = "search", required = false) String search
+			SimpleFilter filter
+			) {
+//		SimpleFilter filter = new SimpleFilter();
+//		filter.setSearch(search);
+		
+		List<BookDTO> bookDTOs = bookService.findAllBooksBySpecification(filter);
+		
+		return new ResponseEntity<List<BookDTO>>(bookDTOs, HttpStatus.OK);
+	}
+	
 }
