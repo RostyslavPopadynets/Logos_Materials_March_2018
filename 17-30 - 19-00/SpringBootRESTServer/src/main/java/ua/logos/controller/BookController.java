@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -16,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import ua.logos.domain.BookDTO;
+import ua.logos.domain.BookUpload;
 import ua.logos.domain.filter.SimpleFilter;
 import ua.logos.entity.Book;
 import ua.logos.service.BookService;
@@ -132,6 +135,34 @@ public class BookController {
 		List<BookDTO> bookDTOs = bookService.findAllBooksBySpecification(filter);
 		
 		return new ResponseEntity<List<BookDTO>>(bookDTOs, HttpStatus.OK);
+	}
+	
+	@PostMapping("/upload")
+	public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
+		System.out.println("File: " + file.getOriginalFilename());
+		bookService.saveFile(file);
+		
+		return new ResponseEntity<String>("File upload success.", HttpStatus.ACCEPTED);
+	}
+	
+	@PostMapping("/upload/object")				// @ModelAttribute
+	public ResponseEntity<String> uploadObjectFile(BookUpload bookUpload) {
+		System.out.println("File: " + bookUpload.getFile().getOriginalFilename());
+		bookService.saveFile(bookUpload.getFile());
+		
+		BookDTO book = new BookDTO();
+		book.setTitle(bookUpload.getTitle());
+		book.setPrice(bookUpload.getPrice());
+		book.setImageUrl(bookUpload.getFile().getOriginalFilename());
+		bookService.saveBook(book);
+		
+		return new ResponseEntity<String>("File upload success.", HttpStatus.ACCEPTED);
+	}
+	
+	@GetMapping("/file")
+	public ResponseEntity<String> getFile(@RequestParam("fileName") String name) {
+		String fileBase64 = bookService.getFile(name);
+		return new ResponseEntity<String>(fileBase64, HttpStatus.OK);
 	}
 	
 }

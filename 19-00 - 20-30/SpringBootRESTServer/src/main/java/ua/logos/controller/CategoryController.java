@@ -18,9 +18,15 @@ import ua.logos.service.CategoryService;
 @RequestMapping("categories")
 public class CategoryController {
 
-	@Autowired
-	private CategoryService categoryService;
 	
+	private final CategoryService categoryService;
+	
+	@Autowired
+	public CategoryController(CategoryService categoryService) {
+		super();
+		this.categoryService = categoryService;
+	}
+
 	@PostMapping
 	public ResponseEntity<Void> createCategory(
 			@RequestBody CategoryDTO categoryDTO) {

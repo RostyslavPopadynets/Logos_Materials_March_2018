@@ -3,6 +3,8 @@ package ua.logos.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -82,6 +84,24 @@ public class BookController {
 	public ResponseEntity<List<BookDTO>> getAllBooks() {
 		List<BookDTO> bookDTOs = bookService.findAllBooks();
 		return new ResponseEntity<List<BookDTO>>(bookDTOs, HttpStatus.OK);
+	}
+	
+	@GetMapping("/category/{categoryId}")
+	public ResponseEntity<List<BookDTO>> getBooksByCategoryId(
+			@PathVariable("categoryId") Long id) {
+		
+		return new ResponseEntity<List<BookDTO>>(
+				bookService.findAllBooksByCategoryId(id), 
+				HttpStatus.OK
+				);
+	}
+	
+	@GetMapping("/pages")
+	public ResponseEntity<List<BookDTO>> getBooksByPage(
+			@PageableDefault Pageable pageable
+			) {
+		return new ResponseEntity<List<BookDTO>>(
+				bookService.findAllBooks(pageable), HttpStatus.OK);
 	}
 	
 }

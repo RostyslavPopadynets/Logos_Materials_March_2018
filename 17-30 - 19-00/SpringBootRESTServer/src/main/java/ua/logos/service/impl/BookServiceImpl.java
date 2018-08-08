@@ -1,5 +1,6 @@
 package ua.logos.service.impl;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -15,12 +16,14 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import ua.logos.domain.BookDTO;
 import ua.logos.domain.filter.SimpleFilter;
 import ua.logos.entity.Book;
 import ua.logos.repository.BookRepository;
 import ua.logos.service.BookService;
+import ua.logos.service.utils.CustomFileUtils;
 import ua.logos.service.utils.ObjectMapperUtils;
 
 @Service
@@ -32,8 +35,8 @@ public class BookServiceImpl implements BookService {
 	@Autowired
 	private ObjectMapperUtils modelMapper;
 
-	// @Autowired
-	// private ModelMapper modelMapper;
+	@Autowired
+	private CustomFileUtils fileUtils;
 
 	@Override
 	public void saveBook(BookDTO bookDto) {
@@ -89,41 +92,50 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public List<BookDTO> findAllBooksBySpecification(SimpleFilter filter) {
-		return modelMapper.mapAll(
-				bookRepository.findAll(getSpecification(filter)),
-				BookDTO.class);
+		return modelMapper.mapAll(bookRepository.findAll(getSpecification(filter)), BookDTO.class);
 	}
-	
+
 	private Specification<Book> getSpecification(SimpleFilter filter) {
-		
+
 		return new Specification<Book>() {
 
 			@Override
-			public Predicate toPredicate(
-					Root<Book> root, 
-					CriteriaQuery<?> query, 
-					CriteriaBuilder criteriaBuilder) {
-				
-					if(filter.getSearch().isEmpty()) {
-						return null;
-					}
-				
-					Expression<String> searchByTitleExp = root.get("title");
-					Predicate searchByTitlePredicate = 
-							criteriaBuilder.like(searchByTitleExp, "%" + filter.getSearch() + "%");
-					
-					Expression<String> searchByIsbnExp = root.get("isbn");
-					Predicate searchByIsbnPredicate = 
-							criteriaBuilder.equal(searchByIsbnExp, filter.getSearch());
-					
-					Expression<BigDecimal> priceFromExp = root.get("price");
-					Predicate priceFromPredicate = 
-							criteriaBuilder.greaterThanOrEqualTo(priceFromExp, new BigDecimal("1000"));
-					
+			public Predicate toPredicate(Root<Book> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+
+				if (filter.getSearch().isEmpty()) {
+					return null;
+				}
+
+				Expression<String> searchByTitleExp = root.get("title");
+				Predicate searchByTitlePredicate = criteriaBuilder.like(searchByTitleExp,
+						"%" + filter.getSearch() + "%");
+
+				Expression<String> searchByIsbnExp = root.get("isbn");
+				Predicate searchByIsbnPredicate = criteriaBuilder.equal(searchByIsbnExp, filter.getSearch());
+
+				Expression<BigDecimal> priceFromExp = root.get("price");
+				Predicate priceFromPredicate = criteriaBuilder.greaterThanOrEqualTo(priceFromExp,
+						new BigDecimal("1000"));
+
 				return criteriaBuilder.or(searchByTitlePredicate, searchByIsbnPredicate);
 				// SELECT b FROM Book b WHERE title LIKE '%erer%'
 			}
-			
+
 		};
+	}
+
+	@Override
+	public void saveFile(MultipartFile file) {
+		try {
+			fileUtils.saveUploadedFile(file);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public String getFile(String fileName) {
+		return fileUtils.getFile(fileName);
+		
 	}
 }
