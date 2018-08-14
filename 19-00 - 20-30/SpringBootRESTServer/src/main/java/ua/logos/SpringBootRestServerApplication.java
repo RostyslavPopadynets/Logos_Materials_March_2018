@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 
+import org.springframework.security.authentication.AuthenticationManager;
 import ua.logos.entity.BookEntity;
 import ua.logos.entity.CategoryEntity;
 import ua.logos.repository.BookRepository;
@@ -24,7 +25,8 @@ public class SpringBootRestServerApplication {
 		addCategories(contex);
 		addBooks(contex);
 	}
-	
+
+
 	private static void addCategories(ConfigurableApplicationContext contex) {
 		List<String> categories = new ArrayList<>();
 		categories.add("Комедія");
