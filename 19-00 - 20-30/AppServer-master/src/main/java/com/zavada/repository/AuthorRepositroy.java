@@ -9,4 +9,6 @@ public interface AuthorRepositroy extends JpaRepository<AuthorEntity, Long> {
 	AuthorEntity findByAuthorId(String id);
 	
 	boolean existsByAuthorId(String authorId);
+	
+	boolean existsByEmail(String email);
 }

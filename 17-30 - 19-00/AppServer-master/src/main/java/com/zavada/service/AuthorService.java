@@ -14,4 +14,6 @@ public interface AuthorService {
 	
 	void update(AuthorDTO author);
 	
+	boolean existsByEmail(String email);
+	
 }

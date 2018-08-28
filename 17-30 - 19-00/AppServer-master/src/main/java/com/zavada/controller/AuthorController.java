@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zavada.domain.AuthorDTO;
@@ -55,6 +56,16 @@ public class AuthorController {
 	public ResponseEntity<AuthorDTO> getAuthor(@PathVariable("authorId") String authorId) {
 		AuthorDTO author = authorService.get(authorId);
 		return new ResponseEntity<AuthorDTO>(author, HttpStatus.OK);
+	}
+	
+	@GetMapping("check-email")
+	public ResponseEntity<Boolean> 
+		checkAuthorByEmail(@RequestParam("email") String email) {	
+		System.out.println("Email:" + email);
+		
+		return new ResponseEntity<Boolean>(
+					authorService.existsByEmail(email), 
+					HttpStatus.OK);
 	}
 	
 }

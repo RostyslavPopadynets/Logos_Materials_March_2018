@@ -27,10 +27,10 @@ public class AuthorServiceImpl implements AuthorService {
 	@Override
 	public void create(AuthorDTO author) {
 		String authorId = stringUtils.generate();
-		if(!authorRepository.existsByAuthorId(authorId)) {
+		if (!authorRepository.existsByAuthorId(authorId)) {
 			author.setAuthorId(authorId);
 			AuthorEntity authorEntity = objectMapper.map(author, AuthorEntity.class);
-			
+
 			authorRepository.save(authorEntity);
 		} else {
 			// exception
@@ -53,6 +53,11 @@ public class AuthorServiceImpl implements AuthorService {
 	@Override
 	public void update(AuthorDTO author) {
 
+	}
+
+	@Override
+	public boolean existsByEmail(String email) {
+		return authorRepository.existsByEmail(email);
 	}
 
 }

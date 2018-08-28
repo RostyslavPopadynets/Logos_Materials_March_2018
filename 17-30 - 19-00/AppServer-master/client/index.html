@@ -23,6 +23,8 @@
                 <div class="form-group">
                     <label for="">Email</label>
                     <input type="text" class="form-control" id="email">
+                    <span id="emailError" class="error text-danger">Email already in use</span>
+                    <span id="emailSuccess" class="success text-success">You can use typed email</span>
                 </div>
                 <div class="form-group">
                     <label for="">Image</label>
@@ -30,7 +32,7 @@
                 </div>
                 <div class="form-group">
                     <label for="">Date of Birth</label>
-                    <input type="date" class="form-control">
+                    <input type="date" class="form-control" id="dateOfBirth">
                 </div>
                 <button type="submit" class="btn btn-success">Add Author</button>
             </form>
@@ -57,15 +59,73 @@
     <script>
         let serverUrl = 'http://localhost:9999/';
         $(document).ready(function() {
+            $('#emailError').hide();
+            $('#emailSuccess').hide();
+            $('#addAuthorForm button').prop('disabled', true);
+
+            getAuthors();
+
+            $('#email').keyup(function(e) {
+                console.log($(this).val());
+                let email = $(this).val();
+
+                $.get(serverUrl + 'authors/check-email?email=' + email, function(data, status)  {
+                    console.log(data);
+                    if(data) {
+                        $('#emailError').show();
+                        $('#emailSuccess').hide();
+                        $('#addAuthorForm button').prop('disabled', true);
+                    } else {
+                        $('#emailError').hide();
+                        $('#emailSuccess').show();
+                        $('#addAuthorForm button').prop('disabled', false);
+                    }
+
+                });
+            })
+
 
             $('#addAuthorForm').submit(function(e) {
                 e.preventDefault();
 
                 let firstName = $('#firstName').val();
-                console.log(firstName);
+                let lastName = $('#lastName').val();
+                let email = $('#email').val();
+                let image = $('#image').val();
+                let dayOfBirth = $('#dateOfBirth').val();
+
+                console.log(firstName, lastName, email, image, dayOfBirth);
+
+                let author = {
+                    firstName: firstName,
+                    lastName: lastName,
+                    email: email,
+                    imageUrl: image,
+                    dateOfBirth: dayOfBirth
+                };
+
+                $.ajax({
+                    url: serverUrl + 'authors',
+                    method: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    data: JSON.stringify(author),
+                    complete: function(data) {
+                        if(data.status == 500) {
+                            console.log('Error happened');
+                        }
+                        if(data.status == 201) {
+                            $('#addAuthorForm')[0].reset();
+                            $('#authorsTable tbody').empty();
+                            getAuthors();
+                        }
+                    }
+                })
 
             });
+        });
 
+        function getAuthors() {
             $.ajax({
                 url: serverUrl + 'authors',
                 method: 'GET',
@@ -87,7 +147,7 @@
                     })
                 }
             })
-        });
+        }
     
     </script>
 </body>
