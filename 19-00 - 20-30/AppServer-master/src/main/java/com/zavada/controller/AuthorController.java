@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.zavada.domain.AuthorDTO;
 import com.zavada.service.AuthorService;
@@ -61,6 +62,15 @@ public class AuthorController {
 	@GetMapping("check-email")
 	public ResponseEntity<Boolean> checkAuthorEmail(@RequestParam("email") String email) {
 		return new ResponseEntity<Boolean>(authorService.existsByEmail(email), HttpStatus.OK);
+	}
+	
+	@PostMapping("image/{authorId}")
+	public ResponseEntity<Void> uploadImage(
+			@PathVariable("authorId") String authorId,
+			@RequestParam("image") MultipartFile file) {
+		
+		authorService.uploadImage(file, authorId);
+		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
 	}
 	
 }

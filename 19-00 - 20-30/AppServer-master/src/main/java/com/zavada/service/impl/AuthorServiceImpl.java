@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.zavada.domain.AuthorDTO;
 import com.zavada.entity.AuthorEntity;
 import com.zavada.repository.AuthorRepositroy;
 import com.zavada.service.AuthorService;
+import com.zavada.service.cloudinary.CloudinaryService;
 import com.zavada.service.utils.ObjectMapperUtils;
 import com.zavada.service.utils.StringUtils;
 
@@ -23,6 +25,9 @@ public class AuthorServiceImpl implements AuthorService {
 
 	@Autowired
 	private StringUtils stringUtils;
+
+	@Autowired
+	private CloudinaryService cloudinaryService;
 
 	@Override
 	public void create(AuthorDTO author) {
@@ -58,6 +63,19 @@ public class AuthorServiceImpl implements AuthorService {
 	@Override
 	public boolean existsByEmail(String email) {
 		return authorRepository.existsByEmail(email);
+	}
+
+	@Override
+	public void uploadImage(MultipartFile file, String authorId) {
+		String imageUrl = cloudinaryService.uploadFile(file, "authors");
+		
+		AuthorEntity authorEntity = authorRepository.findByAuthorId(authorId);
+		if(authorEntity == null) {
+			System.out.println("Author not found");
+		}
+		
+		authorEntity.setImageUrl(imageUrl);
+		authorRepository.save(authorEntity);
 	}
 
 }

@@ -2,6 +2,8 @@ package com.zavada.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.zavada.domain.AuthorDTO;
 
 public interface AuthorService {
@@ -15,4 +17,6 @@ public interface AuthorService {
 	void update(AuthorDTO author);
 	
 	boolean existsByEmail(String email);
+	
+	void uploadImage(MultipartFile file, String authorId);
 }

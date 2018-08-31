@@ -27,10 +27,10 @@
                     <label>Author email</label>
                     <input type="text" class="form-control" id="email">
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label>Image url</label>
                     <input type="text" class="form-control" id="image">
-                </div>
+                </div> -->
                 <div class="form-group">
                     <label>Day of Birth</label>
                     <input type="date" class="form-control" id="dayOfBirth">
@@ -110,8 +110,33 @@
                     }
                 })
 
-            })
+            });
+
+            $(document).on('change', '#authorsTable tbody input', function(e) {
+                console.log(e.target.id);
+                let elementId = e.target.id;
+                let authorId = elementId.split('-')[1];
+                uploadFile(authorId);
+            });
         });
+
+        function uploadFile(authorId) {
+            let formData = new FormData();
+            formData.append('image', $('#image-' + authorId)[0].files[0]);
+
+            $.ajax({
+                url: serverUrl + 'authors/image/' + authorId,
+                method: 'POST',
+                contentType: false,
+                data: formData,
+                processData: false,
+                complete: function(data) {
+                    $('#authorsTable tbody').empty();
+                    getAuthors();
+                }
+            })
+
+        }
 
 
         function getAuthors() {
@@ -126,10 +151,15 @@
                         $('#authorsTable tbody').append(
                             `
                             <tr>
-                                <td> ${ value.authorId } </td>
+                                <td>
+                                    <img src="${value.imageUrl}" width="200px">
+                                </td>
                                 <td> ${ value.firstName } </td>
                                 <td> ${ value.lastName } </td>
                                 <td> ${ value.email } </td>
+                                <td>
+                                    <input type="file" class="form-control" id="image-${value.authorId}">
+                                </td>
                             </tr>
                             `
                         );
