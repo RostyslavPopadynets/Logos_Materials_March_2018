@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +8,9 @@
     <title>Document</title>
     <link rel="stylesheet" href="public/css/bootstrap.min.css">
 </head>
+
 <body>
-    
+
     <div class="container">
         <div class="row col-md-6 col-md-offset-3">
             <h4 class="text-center">Add Author</h4>
@@ -60,64 +62,74 @@
     <script src="public/js/bootstrap.min.js"></script>
     <script>
         let serverUrl = 'http://localhost:9999/';
-        $(document).ready(function() {
-            getAuthors();
-
-
-            $('#email').keyup(function() {
-                console.log($(this).val());
-                let email = $(this).val();
-
-                $.get(serverUrl + 'authors/check-email?email=' + email, function(data, status) {
-                    console.log(data);
-                });
-            })
-
-            $('#addAuthorForm').submit(function(e) {
-                e.preventDefault();
-
-                let first = $('#firstName').val();
-                let last = $('#lastName').val();
-                let email = $('#email').val();
-                let image = $('#image').val();
-                let dayOfBirth = $('#dayOfBirth').val();
-
-                let author = {
-                    firstName: first,
-                    lastName: last,
-                    email: email,
-                    imageUrl: image,
-                    dateOfBirth: dayOfBirth
-                };
-
-                $.ajax({
-                    url: serverUrl + 'authors',
-                    method: 'POST',
-                    dataType: 'json',
-                    contentType: 'application/json',
-                    data: JSON.stringify(author),
-                    complete: function(data) {
-                        console.log(data);
-                        if(data.status == 500) {
-                            console.log('Error happened');
-                        }
-
-                        if(data.status == 201) {
-                            $('#authorsTable tbody').empty();
-                            $('#addAuthorForm')[0].reset();
-                            getAuthors();
-                        }
+        $(document).ready(function () {
+            let token = window.localStorage.getItem('auth_token');
+            if (token) {
+                $.ajaxSetup({
+                    headers: {
+                        'Authorization': 'Bearer ' + token
                     }
                 })
 
-            });
+                getAuthors();
+                $('#email').keyup(function () {
+                    console.log($(this).val());
+                    let email = $(this).val();
 
-            $(document).on('change', '#authorsTable tbody input', function(e) {
-                console.log(e.target.id);
-                let elementId = e.target.id;
-                let authorId = elementId.split('-')[1];
-                uploadFile(authorId);
-            });
+                    $.get(serverUrl + 'authors/check-email?email=' + email, function (data, status) {
+                        console.log(data);
+                    });
+                })
+
+                $('#addAuthorForm').submit(function (e) {
+                    e.preventDefault();
+
+                    let first = $('#firstName').val();
+                    let last = $('#lastName').val();
+                    let email = $('#email').val();
+                    let image = $('#image').val();
+                    let dayOfBirth = $('#dayOfBirth').val();
+
+                    let author = {
+                        firstName: first,
+                        lastName: last,
+                        email: email,
+                        imageUrl: image,
+                        dateOfBirth: dayOfBirth
+                    };
+
+                    $.ajax({
+                        url: serverUrl + 'authors',
+                        method: 'POST',
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        data: JSON.stringify(author),
+                        complete: function (data) {
+                            console.log(data);
+                            if (data.status == 500) {
+                                console.log('Error happened');
+                            }
+
+                            if (data.status == 201) {
+                                $('#authorsTable tbody').empty();
+                                $('#addAuthorForm')[0].reset();
+                                getAuthors();
+                            }
+                        }
+                    })
+
+                });
+
+                $(document).on('change', '#authorsTable tbody input', function (e) {
+                    console.log(e.target.id);
+                    let elementId = e.target.id;
+                    let authorId = elementId.split('-')[1];
+                    uploadFile(authorId);
+                });
+            } else {
+                console.log('Token not exists');
+                $('.container').hide();
+            }
         });
 
         function uploadFile(authorId) {
@@ -130,7 +142,7 @@
                 contentType: false,
                 data: formData,
                 processData: false,
-                complete: function(data) {
+                complete: function (data) {
                     $('#authorsTable tbody').empty();
                     getAuthors();
                 }
@@ -145,9 +157,9 @@
                 method: 'GET',
                 dataType: 'json',
                 contentType: 'application/json',
-                success: function(response) {
+                success: function (response) {
                     console.log(response);
-                    $.each(response, function(key, value) {
+                    $.each(response, function (key, value) {
                         $('#authorsTable tbody').append(
                             `
                             <tr>
@@ -169,4 +181,5 @@
         }
     </script>
 </body>
+
 </html>
