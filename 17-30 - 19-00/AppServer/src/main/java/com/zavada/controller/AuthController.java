@@ -29,8 +29,15 @@ public class AuthController {
 	@PostMapping("signin")
 	public ResponseEntity<SigninResponse> signin(@RequestBody SigninRequest request) {
 		String token = userService.signin(request.getUsername(), request.getPassword());
+		String role = "";
+		System.out.println(token + "\n" + request.getUsername() + "\n" + request.getPassword());
 		
-		return new ResponseEntity<SigninResponse>(new SigninResponse(token), HttpStatus.OK);
+		if(token != null) {
+			role = userService.findByUsername(request.getUsername()).getRole().toString();
+			System.out.println("ROLE: " + role);
+		}
+		
+		return new ResponseEntity<SigninResponse>(new SigninResponse(token, role), HttpStatus.OK);
 	}
 	
 }

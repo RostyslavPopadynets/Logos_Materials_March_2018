@@ -34,9 +34,8 @@
     </div>
 
     <script src="public/js/jquery.min.js"></script>
+    <script src="public/js/global.js"></script>
     <script>
-        let serverUrl = 'http://localhost:9999/auth/';
-
         $(document).ready(function() {
 
             $('#signinForm').submit(function(e) {
@@ -53,7 +52,7 @@
             };
 
             $.ajax({
-                url: serverUrl + 'signin',
+                url: serverUrl + 'auth/signin',
                 method: 'POST',
                 data: JSON.stringify(loginData),
                 contentType: 'application/json',
@@ -61,7 +60,17 @@
                     if(data.status == 200) {
                         console.log(data);
                         window.localStorage.setItem('auth_token', data.responseJSON.token);
-                        $(location).attr('href', 'index.html');
+                        window.localStorage.setItem('auth_role', data.responseJSON.role);
+
+                        if(data.responseJSON.role == 'ROLE_ADMIN') {
+                            $(location).attr('href', 'pages/admin/dashboard.html');
+                        }
+
+                        if(data.responseJSON.role == 'ROLE_USER') {
+                            $(location).attr('href', 'pages/user/profile.html');
+                        }
+
+                        //$(location).attr('href', 'index.html');
                     }
                 }
             })
