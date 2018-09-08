@@ -18,4 +18,5 @@ public interface UserService {
 	
 	String signin(String username, String password);
 	
+	void verifyAccount(String verifyToken);
 }

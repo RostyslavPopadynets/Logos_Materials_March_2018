@@ -30,10 +30,18 @@ public class UserEntity extends BaseEntity {
 	@Column(nullable = false)
 	private String password;
 	
+	@Column(nullable = false, unique = true)
+	private String email;
+	
 	private String firstName;
 	
 	private String lastName;
 	
 	@Enumerated(EnumType.ORDINAL)
 	private UserRole role;
+	
+	private String emailVerificationToken;
+	
+	@Column(nullable = true, columnDefinition = "boolean default false")
+	private Boolean emailVerificationStatus;
 }
